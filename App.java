@@ -88,7 +88,10 @@ public class App extends Application {
         
     });
     
-    
+    report.setOnAction(k -> {
+        printSemester temp = new printSemester(this);
+    });
+        
     studentCourse.setOnAction(w -> {
             
         showStudentCourseInfo temp = new showStudentCourseInfo(this);    
