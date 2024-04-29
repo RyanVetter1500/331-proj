@@ -1,4 +1,4 @@
-package com.mycompany.projfx;
+package com.mycompany.projpart3;
 
 import javafx.application.Application;
 import javafx.collections.ObservableList;
