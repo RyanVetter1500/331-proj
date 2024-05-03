@@ -1,0 +1,17 @@
+all courses taught in semester
+
+select coursename 
+from course
+join enrollment 
+on course.courseid = enrollment.courseid
+where enrollment.year = and enrollment.period = 
+
+all courses taught by faculty member 
+
+select coursename
+from course
+join enrollment 
+on course.courseid = enrollment.courseid
+join faculty
+on enrollment.facultyid = faculty.facultyid
+where enrollment.year = and enrollment.period = and enrollment.facultyid = 
