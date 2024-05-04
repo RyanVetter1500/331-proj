@@ -1,4 +1,4 @@
-package com.mycompany.projpart3;
+package com.mycompany.dbxjavafx;
 
 import javafx.application.Application;
 import javafx.collections.ObservableList;
@@ -10,6 +10,11 @@ import javafx.stage.*;
 import javafx.collections.*;
 import java.util.ArrayList;
 
+import java.sql.*;
+import java.util.Scanner;
+import oracle.jdbc.pool.*;
+import oracle.jdbc.*;
+import java.util.*;
 
 public class printSemester {
     
@@ -83,17 +88,52 @@ public class printSemester {
                 
                 ObservableList<String> semesterList = FXCollections.observableArrayList();
                 
+//                for (int i = 0; i < App.studentEnrollmentArray.size(); i++)
+//                {
+//                    if (selectedPeriod.equals(App.studentEnrollmentArray.get(i).semesterInstance.period
+//                    ) && selectedYearInt == App.studentEnrollmentArray.get(i).semesterInstance.year)
+//                    {
+//                    semesterList.add(App.studentEnrollmentArray.get(i).courseInstance.prefix + ": " + App.studentEnrollmentArray.get(i).courseInstance.courseNum + " "
+//                            + App.studentEnrollmentArray.get(i).courseInstance.courseName + ", " + 
+//                          "Time Start: " + App.studentEnrollmentArray.get(i).courseInstance.timeStart + " " + 
+//                          "Time End: " + App.studentEnrollmentArray.get(i).courseInstance.timeEnd);
+//
+//                    }
+//                }
+                
+                int selectedID = 0;
                 for (int i = 0; i < App.studentEnrollmentArray.size(); i++)
                 {
                     if (selectedPeriod.equals(App.studentEnrollmentArray.get(i).semesterInstance.period
                     ) && selectedYearInt == App.studentEnrollmentArray.get(i).semesterInstance.year)
                     {
-                    semesterList.add(App.studentEnrollmentArray.get(i).courseInstance.prefix + ": " + App.studentEnrollmentArray.get(i).courseInstance.courseNum + " "
-                            + App.studentEnrollmentArray.get(i).courseInstance.courseName + ", " + 
-                          "Time Start: " + App.studentEnrollmentArray.get(i).courseInstance.timeStart + " " + 
-                          "Time End: " + App.studentEnrollmentArray.get(i).courseInstance.timeEnd);
-
+                        selectedID = App.studentEnrollmentArray.get(i).courseInstance.courseID;
+                        break;
                     }
+                }
+                
+                String semesterScheduleSQL = "select coursename from course " +
+                "join enrollment on course.courseid = enrollment.courseid " +
+                "where enrollment.year = " + selectedYearInt + "and enrollment.period = " + "\'" +
+                selectedPeriod + "\'";
+                
+                App.runDBQuery(semesterScheduleSQL, 'r');
+            
+                //have to use try catch here
+                //adds each row to list
+                //this query returns a table with only one column and a variable amount of rows
+
+                try
+                {
+                    while(App.jsqlResults.next())
+                    {
+                      semesterList.add(App.jsqlResults.getString(1));
+                    }
+                }
+
+                catch (SQLException sqlex)
+                {
+                    System.out.println(sqlex.toString());
                 }
                 
                 
@@ -167,19 +207,56 @@ public class printSemester {
                 
                 ObservableList<String> facultyCourses = FXCollections.observableArrayList();
                 
-                for(int i =0; i < App.facultyAssignArray.size(); i++)
+                // CHANGED CODE
+//                for(int i =0; i < App.facultyAssignArray.size(); i++)
+//                {
+//                    if ( selectedName.equals(App.facultyAssignArray.get(i).facultyInstance.emplName)
+//                        && selectedYearInt == App.facultyAssignArray.get(i).semesterInstance.year
+//                        && selectedPeriod.equals(App.facultyAssignArray.get(i).semesterInstance.period ))
+//                    {
+//                          facultyCourses.add(App.facultyAssignArray.get(i).courseInstance.prefix + ": " + 
+//                          App.facultyAssignArray.get(i).courseInstance.courseName + ", " + 
+//                          "Time Start: " + App.facultyAssignArray.get(i).courseInstance.timeStart + " " + 
+//                          "Time End: " + App.facultyAssignArray.get(i).courseInstance.timeEnd);
+//
+//                    }
+//                }
+                
+                int selectedID = 0;
+                // loop to find facultyID as PK
+                for (int i = 0; i < App.facultyAssignArray.size(); i++)
                 {
-                    if ( selectedName.equals(App.facultyAssignArray.get(i).facultyInstance.emplName)
+                    if (selectedName.equals(App.facultyAssignArray.get(i).facultyInstance.emplName) 
                         && selectedYearInt == App.facultyAssignArray.get(i).semesterInstance.year
-                        && selectedPeriod.equals(App.facultyAssignArray.get(i).semesterInstance.period ))
+                        && selectedPeriod.equals(App.facultyAssignArray.get(i).semesterInstance.period))
                     {
-                          facultyCourses.add(App.facultyAssignArray.get(i).courseInstance.prefix + ": " + 
-                          App.facultyAssignArray.get(i).courseInstance.courseName + ", " + 
-                          "Time Start: " + App.facultyAssignArray.get(i).courseInstance.timeStart + " " + 
-                          "Time End: " + App.facultyAssignArray.get(i).courseInstance.timeEnd);
-
+                        selectedID = App.facultyAssignArray.get(i).facultyInstance.getFacultyID();
+                        break;
                     }
                 }
+                
+                String facultyScheduleSQL = "select coursename from course join schedule on course.courseid = schedule.courseid " +
+                "join faculty on schedule.facultyid = faculty.facultyid" +
+                " where schedule.year = " + selectedYearInt + " and schedule.period = " + "\'" + selectedPeriod + "\'" +
+                        " and schedule.facultyid = " + selectedID;
+                
+                App.runDBQuery(facultyScheduleSQL, 'r');
+                
+                try
+                {
+                    while(App.jsqlResults.next())
+                    {
+                      facultyCourses.add(App.jsqlResults.getString(1));
+                    }
+                }
+            
+                catch (SQLException sqlex)
+                {
+                    System.out.println(sqlex.toString());
+                }
+                
+                
+                
                 
                 ListView<String> listViewFaculty = new ListView<String>(facultyCourses);
                 oPane.add(listViewFaculty, 0, 10);
