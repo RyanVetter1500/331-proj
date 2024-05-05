@@ -1,5 +1,5 @@
 
-package com.mycompany.projpart3;
+package com.mycompany.dbxjavafx;
 
 import javafx.application.Application;
 import javafx.collections.ObservableList;
@@ -151,53 +151,61 @@ public class EditRecord {
 
                 case "Name":
                         App.studentArray.get(selectedStudentPosition).studentName = newValue;
-                        String studentNameSQL = "UPDATE Faculty SET STUDENTNAME = " + "\'" + newValue + "\'";
+                        String studentNameSQL = "UPDATE Student SET STUDENTNAME = " + "\'" + newValue + "\'"
+                                + " WHERE Student.StudentName = " + "\'" + selectedName + "\'";
                         App.runDBQuery(studentNameSQL, 'u');
                         break;
 
                 case "SSN":
                     int selectedSSN = Integer.valueOf(newValue);
                     App.studentArray.get(selectedStudentPosition).setSSN(selectedSSN);
-                    String ssnSQL = "UPDATE Faculty SET SSN = " + "\'" + selectedSSN + "\'";
+                    String ssnSQL = "UPDATE Student SET SSN = " + "\'" + selectedSSN + "\'"
+                            + " WHERE Student.StudentName = " + "\'" + selectedName + "\'";
                     App.runDBQuery(ssnSQL, 'u');
                     break;
 
                 case "Address":
                     App.studentArray.get(selectedStudentPosition).address = newValue;
-                    String addressSQL = "UPDATE Faculty SET ADDRESS = " + "\'" + newValue + "\'";
+                    String addressSQL = "UPDATE Student SET ADDRESS = " + "\'" + newValue + "\'"
+                            + " WHERE Student.StudentName = " + "\'" + selectedName + "\'";
                     App.runDBQuery(addressSQL, 'u');
                     break;
 
                 case "Email":
                     App.studentArray.get(selectedStudentPosition).email = newValue;
-                    String emailSQL = "UPDATE Faculty SET EMAIL = " + "\'" + newValue + "\'";
+                    String emailSQL = "UPDATE Student SET EMAIL = " + "\'" + newValue + "\'"
+                            + " WHERE Student.StudentName = " + "\'" + selectedName + "\'";
                     App.runDBQuery(emailSQL, 'u');
                     break;
 
                 case "GPA":
                     double selectedGPA = Double.valueOf(newValue);
                     App.studentArray.get(selectedStudentPosition).setgpa(selectedGPA);
-                    String gpaSQL = "UPDATE Faculty SET GPA = " + "\'" + selectedGPA + "\'";
+                    String gpaSQL = "UPDATE Student SET GPA = " + "\'" + selectedGPA + "\'"
+                            + " WHERE Student.StudentName = " + "\'" + selectedName + "\'";
                     App.runDBQuery(gpaSQL, 'u');
                     break;
 
 
                 case "Emergency Contact Name":
                     App.studentArray.get(selectedStudentPosition).contacts[0] = newValue;
-                    String contactNameSQL = "UPDATE Faculty SET EMERGENCYCONTACTNAME = " + "\'" + newValue + "\'";
+                    String contactNameSQL = "UPDATE Student SET EMERGENCYCONTACTNAME = " + "\'" + newValue + "\'"
+                            + " WHERE Student.StudentName = " + "\'" + selectedName + "\'";
                     App.runDBQuery(contactNameSQL, 'u');
                     break;
 
 
                 case "Emergency Contact Phone Number":
                     App.studentArray.get(selectedStudentPosition).contacts[1] = newValue;
-                    String contactPhoneSQL = "UPDATE Faculty SET EMERGENCYCONTACTPHONE = " + "\'" + newValue + "\'";
+                    String contactPhoneSQL = "UPDATE Student SET EMERGENCYCONTACTPHONE = " + "\'" + newValue + "\'"
+                            + " WHERE Student.StudentName = " + "\'" + selectedName + "\'";
                     App.runDBQuery(contactPhoneSQL, 'u');
                     break;
 
                 case "Emergency Contact Address":
                 App.studentArray.get(selectedStudentPosition).contacts[2] = newValue;
-                String contactAddressSQL = "UPDATE Faculty SET EMERGENCYCONTACTADDRESS = " + "\'" + newValue + "\'";
+                String contactAddressSQL = "UPDATE Student SET EMERGENCYCONTACTADDRESS = " + "\'" + newValue + "\'"
+                        + " WHERE Student.StudentName = " + "\'" + selectedName + "\'";
                     App.runDBQuery(contactAddressSQL, 'u');
                 break;
 
@@ -220,7 +228,7 @@ public class EditRecord {
     courseBox.setOnAction(e -> {
         
         String selectedCourse = (String)courseBox.getValue();
-        String[] courseOptions = {"Course ID", "Prefix", "Course Number", "Course Name", "days", "Time Start", "Time End", "credit Hr"};
+        String[] courseOptions = {"Course ID", "Prefix", "Course Number", "Course Name", "Days", "Time Start", "Time End", "Credit Hr"};
         
         
         ChoiceBox courseEdit = new ChoiceBox(FXCollections.observableArrayList(courseOptions));
@@ -260,54 +268,62 @@ public class EditRecord {
                 case "Course ID":
                         int selectedID = Integer.valueOf(newValue);
                         App.courseArray.get(selectedCoursePosition).courseID = selectedID;
-                        String courseIDSQL = "UPDATE Faculty SET COURSEID = " + "\'" + selectedID + "\'";
+                        String courseIDSQL = "UPDATE Course SET COURSEID = " + "\'" + selectedID + "\'"
+                                + " WHERE Course.CourseName = " + "\'" + selectedCourse + "\'";
                         App.runDBQuery(courseIDSQL, 'u');
                         break;
 
                 case "Prefix":
                     App.courseArray.get(selectedCoursePosition).prefix = newValue;
-                    String prefixSQL = "UPDATE Faculty SET PREFIX = " + "\'" + newValue + "\'";
+                    String prefixSQL = "UPDATE Course SET PREFIX = " + "\'" + newValue + "\'"
+                            + " WHERE Course.CourseName = " + "\'" + selectedCourse + "\'";
                     App.runDBQuery(prefixSQL, 'u');
                     break;
 
                 case "Course Number":
                     int selectedCourseNum = Integer.valueOf(newValue);
                     App.courseArray.get(selectedCoursePosition).courseNum = selectedCourseNum;
-                    String courseNumSQL = "UPDATE Faculty SET COURSENUM = " + "\'" + selectedCourseNum + "\'";
+                    String courseNumSQL = "UPDATE Course SET COURSENUM = " + "\'" + selectedCourseNum + "\'"
+                            + " WHERE Course.CourseName = " + "\'" + selectedCourse + "\'";
                     App.runDBQuery(courseNumSQL, 'u');
                     break;
 
                 case "Course Name":
                     App.courseArray.get(selectedCoursePosition).courseName = newValue;
-                    String courseNameSQL = "UPDATE Faculty SET COURSENAME = " + "\'" + newValue + "\'";
+                    String courseNameSQL = "UPDATE Course SET COURSENAME = " + "\'" + newValue + "\'"
+                            + " WHERE Course.CourseName = " + "\'" + selectedCourse + "\'";
                     App.runDBQuery(courseNameSQL, 'u');
                     break;
 
                 case "days":
                     int selectedDays = Integer.valueOf(newValue);
                     App.courseArray.get(selectedCoursePosition).days = selectedDays;
-                    String daysSQL = "UPDATE Faculty SET DAYS = " + "\'" + selectedDays + "\'";
+                    String daysSQL = "UPDATE Course SET DAYS = " + "\'" + selectedDays + "\'"
+                            + " WHERE Course.CourseName = " + "\'" + selectedCourse + "\'";
                     App.runDBQuery(daysSQL, 'u');
                     break;
 
 
                 case "Time Start":
                     App.courseArray.get(selectedCoursePosition).timeStart = newValue;
-                    String startSQL = "UPDATE Faculty SET TIMESTART = " + "\'" + newValue + "\'";
+                    String startSQL = "UPDATE Course SET TIMESTART = " + "\'" + newValue + "\'"
+                            + " WHERE Course.CourseName = " + "\'" + selectedCourse + "\'";
                     App.runDBQuery(startSQL, 'u');
                     break;
 
 
                 case "Time End":
                     App.courseArray.get(selectedCoursePosition).timeEnd = newValue;
-                    String endSQL = "UPDATE Faculty SET TIMEEND = " + "\'" + newValue + "\'";
+                    String endSQL = "UPDATE Course SET TIMEEND = " + "\'" + newValue + "\'"
+                            + " WHERE Course.CourseName = " + "\'" + selectedCourse + "\'";
                     App.runDBQuery(endSQL, 'u');
                     break;
 
                 case "Credit Hr":
                 int selectedHr = Integer.valueOf(newValue); 
                 App.courseArray.get(selectedCoursePosition).creditHr = selectedHr;
-                String creditHrSQL = "UPDATE Faculty SET CREDITHOUR = " + "\'" + selectedHr + "\'";
+                String creditHrSQL = "UPDATE Course SET CREDITHOUR = " + "\'" + selectedHr + "\'"
+                        + " WHERE Course.CourseName = " + "\'" + selectedCourse + "\'";
                     App.runDBQuery(creditHrSQL, 'u');
                 break;
 
@@ -369,43 +385,51 @@ public class EditRecord {
                 case "Faculty ID":
                     int selectedID = Integer.valueOf(newValue);
                     App.facultyArray.get(selectedFacultyPosition).setFacultyID(selectedID);
-                    String facIDSQL = "UPDATE Faculty SET FacultyID = " + "\'" + selectedID + "\'";       
+                    String facIDSQL = "UPDATE Faculty SET FacultyID = " + "\'" + selectedID + "\'"
+                            + " WHERE Faculty.EMPLNAME = " + "\'" + selectedFaculty + "\'";       
                     App.runDBQuery(facIDSQL, 'u');      
                     break;
                 case "Name":
                     App.facultyArray.get(selectedFacultyPosition).emplName = newValue;
-                    String facNameSQL = "UPDATE Faculty SET emplName = " + "\'" + newValue + "\'";
+                    String facNameSQL = "UPDATE Faculty SET EMPLNAME = " + "\'" + newValue + "\'"
+                            + " WHERE Faculty.EMPLNAME = " + "\'" + selectedFaculty + "\'";
                     App.runDBQuery(facNameSQL, 'u');
                     break;
                 case "Email":
                     App.facultyArray.get(selectedFacultyPosition).emplEmail = newValue;
-                    String facEmailSQL = "UPDATE Faculty SET EMPLOYEEEMAIL = " + "\'" + newValue + "\'";
+                    String facEmailSQL = "UPDATE Faculty SET EMPLOYEEEMAIL = " + "\'" + newValue + "\'"
+                            + " WHERE Faculty.EMPLNAME = " + "\'" + selectedFaculty + "\'";
                     App.runDBQuery(facEmailSQL, 'u');
                     break;
                 case "Building":
                     App.facultyArray.get(selectedFacultyPosition).building = newValue;
-                    String buildingSQL = "UPDATE Faculty SET building = " + "\'" + newValue + "\'";
+                    String buildingSQL = "UPDATE Faculty SET building = " + "\'" + newValue + "\'"
+                            + " WHERE Faculty.EMPLNAME = " + "\'" + selectedFaculty + "\'";
                     App.runDBQuery(buildingSQL, 'u');
                     break;
                 case "Office Number":
                     int selectedNum = Integer.valueOf(newValue);
                         App.facultyArray.get(selectedFacultyPosition).officeNum = selectedNum;
-                        String officeSQL = "UPDATE Faculty SET officeNum = " + "\'" + selectedNum + "\'";
+                        String officeSQL = "UPDATE Faculty SET officeNum = " + "\'" + selectedNum + "\'"
+                                + " WHERE Faculty.EMPLNAME = " + "\'" + selectedFaculty + "\'";
                         App.runDBQuery(officeSQL, 'u');
                     break;
                 case "Phone Number":
                     App.facultyArray.get(selectedFacultyPosition).emplPhone = newValue;
-                    String facPhoneSQL = "UPDATE Faculty SET emplPhone = " + "\'" + newValue + "\'";
+                    String facPhoneSQL = "UPDATE Faculty SET emplPhone = " + "\'" + newValue + "\'"
+                            + " WHERE Faculty.EMPLNAME = " + "\'" + selectedFaculty + "\'";
                     App.runDBQuery(facPhoneSQL, 'u');
                     break;
                 case "Department":
                     App.facultyArray.get(selectedFacultyPosition).dept = newValue;
-                    String deptSQL = "UPDATE Faculty SET dept = " + "\'" + newValue + "\'";
+                    String deptSQL = "UPDATE Faculty SET dept = " + "\'" + newValue + "\'"
+                            + " WHERE Faculty.EMPLNAME = " + "\'" + selectedFaculty + "\'";
                     App.runDBQuery(deptSQL, 'u');
                     break;
                 case "Position":
                     App.facultyArray.get(selectedFacultyPosition).position = newValue;
-                    String posSQL = "UPDATE Faculty SET position = " + "\'" + newValue + "\'";
+                    String posSQL = "UPDATE Faculty SET position = " + "\'" + newValue + "\'"
+                            + " WHERE Faculty.EMPLNAME = " + "\'" + selectedFaculty + "\'";
                     App.runDBQuery(posSQL, 'u');
                     break;
                         
