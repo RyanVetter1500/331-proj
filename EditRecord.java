@@ -1,5 +1,5 @@
 
-package com.mycompany.projpart3;
+package com.mycompany.dbxjavafx;
 
 import javafx.application.Application;
 import javafx.collections.ObservableList;
@@ -151,38 +151,54 @@ public class EditRecord {
 
                 case "Name":
                         App.studentArray.get(selectedStudentPosition).studentName = newValue;
+                        String studentNameSQL = "UPDATE Faculty SET STUDENTNAME = " + "\'" + newValue + "\'";
+                        App.runDBQuery(studentNameSQL, 'u');
                         break;
 
                 case "SSN":
                     int selectedSSN = Integer.valueOf(newValue);
                     App.studentArray.get(selectedStudentPosition).setSSN(selectedSSN);
+                    String ssnSQL = "UPDATE Faculty SET SSN = " + "\'" + selectedSSN + "\'";
+                    App.runDBQuery(ssnSQL, 'u');
                     break;
 
                 case "Address":
                     App.studentArray.get(selectedStudentPosition).address = newValue;
+                    String addressSQL = "UPDATE Faculty SET ADDRESS = " + "\'" + newValue + "\'";
+                    App.runDBQuery(addressSQL, 'u');
                     break;
 
                 case "Email":
                     App.studentArray.get(selectedStudentPosition).email = newValue;
+                    String emailSQL = "UPDATE Faculty SET EMAIL = " + "\'" + newValue + "\'";
+                    App.runDBQuery(emailSQL, 'u');
                     break;
 
                 case "GPA":
                     double selectedGPA = Double.valueOf(newValue);
                     App.studentArray.get(selectedStudentPosition).setgpa(selectedGPA);
+                    String gpaSQL = "UPDATE Faculty SET GPA = " + "\'" + selectedGPA + "\'";
+                    App.runDBQuery(gpaSQL, 'u');
                     break;
 
 
                 case "Emergency Contact Name":
                     App.studentArray.get(selectedStudentPosition).contacts[0] = newValue;
+                    String contactNameSQL = "UPDATE Faculty SET EMERGENCYCONTACTNAME = " + "\'" + newValue + "\'";
+                    App.runDBQuery(contactNameSQL, 'u');
                     break;
 
 
                 case "Emergency Contact Phone Number":
                     App.studentArray.get(selectedStudentPosition).contacts[1] = newValue;
+                    String contactPhoneSQL = "UPDATE Faculty SET EMERGENCYCONTACTPHONE = " + "\'" + newValue + "\'";
+                    App.runDBQuery(contactPhoneSQL, 'u');
                     break;
 
                 case "Emergency Contact Address":
                 App.studentArray.get(selectedStudentPosition).contacts[2] = newValue;
+                String contactAddressSQL = "UPDATE Faculty SET EMERGENCYCONTACTADDRESS = " + "\'" + newValue + "\'";
+                    App.runDBQuery(contactAddressSQL, 'u');
                 break;
 
             }
@@ -244,39 +260,55 @@ public class EditRecord {
                 case "Course ID":
                         int selectedID = Integer.valueOf(newValue);
                         App.courseArray.get(selectedCoursePosition).courseID = selectedID;
+                        String courseIDSQL = "UPDATE Faculty SET COURSEID = " + "\'" + selectedID + "\'";
+                        App.runDBQuery(courseIDSQL, 'u');
                         break;
 
                 case "Prefix":
                     App.courseArray.get(selectedCoursePosition).prefix = newValue;
+                    String prefixSQL = "UPDATE Faculty SET PREFIX = " + "\'" + newValue + "\'";
+                    App.runDBQuery(prefixSQL, 'u');
                     break;
 
                 case "Course Number":
                     int selectedCourseNum = Integer.valueOf(newValue);
                     App.courseArray.get(selectedCoursePosition).courseNum = selectedCourseNum;
+                    String courseNumSQL = "UPDATE Faculty SET COURSENUM = " + "\'" + selectedCourseNum + "\'";
+                    App.runDBQuery(courseNumSQL, 'u');
                     break;
 
                 case "Course Name":
                     App.courseArray.get(selectedCoursePosition).courseName = newValue;
+                    String courseNameSQL = "UPDATE Faculty SET COURSENAME = " + "\'" + newValue + "\'";
+                    App.runDBQuery(courseNameSQL, 'u');
                     break;
 
                 case "days":
                     int selectedDays = Integer.valueOf(newValue);
                     App.courseArray.get(selectedCoursePosition).days = selectedDays;
+                    String daysSQL = "UPDATE Faculty SET DAYS = " + "\'" + selectedDays + "\'";
+                    App.runDBQuery(daysSQL, 'u');
                     break;
 
 
                 case "Time Start":
                     App.courseArray.get(selectedCoursePosition).timeStart = newValue;
+                    String startSQL = "UPDATE Faculty SET TIMESTART = " + "\'" + newValue + "\'";
+                    App.runDBQuery(startSQL, 'u');
                     break;
 
 
                 case "Time End":
                     App.courseArray.get(selectedCoursePosition).timeEnd = newValue;
+                    String endSQL = "UPDATE Faculty SET TIMEEND = " + "\'" + newValue + "\'";
+                    App.runDBQuery(endSQL, 'u');
                     break;
 
                 case "Credit Hr":
                 int selectedHr = Integer.valueOf(newValue); 
                 App.courseArray.get(selectedCoursePosition).creditHr = selectedHr;
+                String creditHrSQL = "UPDATE Faculty SET CREDITHOUR = " + "\'" + selectedHr + "\'";
+                    App.runDBQuery(creditHrSQL, 'u');
                 break;
 
             }
@@ -337,28 +369,44 @@ public class EditRecord {
                 case "Faculty ID":
                     int selectedID = Integer.valueOf(newValue);
                     App.facultyArray.get(selectedFacultyPosition).setFacultyID(selectedID);
+                    String facIDSQL = "UPDATE Faculty SET FacultyID = " + "\'" + selectedID + "\'";       
+                    App.runDBQuery(facIDSQL, 'u');      
                     break;
                 case "Name":
                     App.facultyArray.get(selectedFacultyPosition).emplName = newValue;
+                    String facNameSQL = "UPDATE Faculty SET emplName = " + "\'" + newValue + "\'";
+                    App.runDBQuery(facNameSQL, 'u');
                     break;
                 case "Email":
                     App.facultyArray.get(selectedFacultyPosition).emplEmail = newValue;
+                    String facEmailSQL = "UPDATE Faculty SET EMPLOYEEEMAIL = " + "\'" + newValue + "\'";
+                    App.runDBQuery(facEmailSQL, 'u');
                     break;
                 case "Building":
                     App.facultyArray.get(selectedFacultyPosition).building = newValue;
+                    String buildingSQL = "UPDATE Faculty SET building = " + "\'" + newValue + "\'";
+                    App.runDBQuery(buildingSQL, 'u');
                     break;
                 case "Office Number":
                     int selectedNum = Integer.valueOf(newValue);
                         App.facultyArray.get(selectedFacultyPosition).officeNum = selectedNum;
+                        String officeSQL = "UPDATE Faculty SET officeNum = " + "\'" + selectedNum + "\'";
+                        App.runDBQuery(officeSQL, 'u');
                     break;
                 case "Phone Number":
                     App.facultyArray.get(selectedFacultyPosition).emplPhone = newValue;
+                    String facPhoneSQL = "UPDATE Faculty SET emplPhone = " + "\'" + newValue + "\'";
+                    App.runDBQuery(facPhoneSQL, 'u');
                     break;
                 case "Department":
                     App.facultyArray.get(selectedFacultyPosition).dept = newValue;
+                    String deptSQL = "UPDATE Faculty SET dept = " + "\'" + newValue + "\'";
+                    App.runDBQuery(deptSQL, 'u');
                     break;
                 case "Position":
                     App.facultyArray.get(selectedFacultyPosition).position = newValue;
+                    String posSQL = "UPDATE Faculty SET position = " + "\'" + newValue + "\'";
+                    App.runDBQuery(posSQL, 'u');
                     break;
                         
                     }
@@ -432,9 +480,15 @@ public class EditRecord {
                 case "Year":
                     int selectedSemesterYear = Integer.valueOf(newValue);
                     App.semesterArray.get(selectedSemesterPosition).year = selectedSemesterYear;
+                    String editYearSQL = "UPDATE Semester SET Year = " + selectedSemesterYear + 
+                            " WHERE Semester.Year = " + selectedYearInt;
+                    App.runDBQuery(editYearSQL, 'u');
                     break;
                 case "Period":
                     App.semesterArray.get(selectedSemesterPosition).period = newValue;
+                    String editPeriodSQL = "UPDATE Semester SET Period = " + "\'" + newValue + "\'" +
+                            " WHERE Semester.Period = " + selectedPeriod;
+                    App.runDBQuery(editPeriodSQL, 'u');
                     break;
             }
             
