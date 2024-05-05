@@ -1,5 +1,5 @@
 
-package com.mycompany.dbxjavafx;
+package com.mycompany.projpart3;
 
 import javafx.application.Application;
 import javafx.collections.ObservableList;
